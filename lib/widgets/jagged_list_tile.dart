@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'jagged_container.dart';
+
 class JaggedListTile extends StatelessWidget {
   final String? imageUrl;
   const JaggedListTile({super.key, this.imageUrl});

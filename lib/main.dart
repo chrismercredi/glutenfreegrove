@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'env.dart';
+import 'pages/pages.dart';
+import 'state/auth_state_change_notifier.dart';
+import 'utils/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
