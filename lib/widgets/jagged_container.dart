@@ -44,6 +44,7 @@ class JaggedContainer extends StatelessWidget {
         aspectRatio: aspectRatio!,
         child: Stack(
           children: [
+            _buildImage(),
             CustomPaint(
               painter: JaggedHandDrawnBorderPainter(
                 strokeWidth: strokeWidth!,
@@ -59,7 +60,6 @@ class JaggedContainer extends StatelessWidget {
                 icon: Icon(Icons.edit, color: iconColor),
               ),
             ),
-            _buildImage(),
           ],
         ),
       ),
@@ -92,52 +92,3 @@ class JaggedContainer extends StatelessWidget {
     }
   }
 }
-// }
-//             _buildImage(),
-//             CustomPaint(
-//               painter: JaggedHandDrawnBorderPainter(
-//                 strokeWidth: strokeWidth!,
-//               ),
-//               child:
-//                   Container(), // Empty container for the CustomPaint to paint over
-//             ),
-//             Positioned(
-//               top: 1,
-//               right: 1,
-//               child: IconButton(
-//                 onPressed: onEdit,
-//                 icon: Icon(Icons.edit, color: iconColor),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   Widget _buildImage() {
-//     if (networkImage != null) {
-//       return ClipRect(
-//         child: Image.network(
-//           networkImage!,
-//           fit: BoxFit.cover,
-//         ),
-//       );
-//     } else if (assetImage != null) {
-//       return ClipRect(
-//         child: Image.asset(
-//           assetImage!,
-//           fit: BoxFit.cover,
-//         ),
-//       );
-//     } else {
-//       // Default 'no image' icon
-//       return Container(
-//         color: Colors.black,
-//         child: const Center(
-//           child: Icon(Icons.image_not_supported, color: Colors.white),
-//         ),
-//       );
-//     }
-//   }
-// }

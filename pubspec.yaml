@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
+  animated_flip_counter: ^0.2.6
   fast_noise: ^2.0.0
   flutter:
     sdk: flutter

@@ -13,6 +13,30 @@ class SplashPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              Navigator.of(context).pushNamed('/items-catalog-alt');
+            },
+            icon: const Tooltip(
+              message: 'Items Catalog Alt',
+              child: Icon(
+                Icons.bookmark,
+                semanticLabel: 'Items IconButton',
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/items-catalog');
+            },
+            icon: const Tooltip(
+              message: 'Items Catalog',
+              child: Icon(
+                Icons.book,
+                semanticLabel: 'Items IconButton',
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
               Navigator.of(context).pushNamed('/items-page');
             },
             icon: const Tooltip(
