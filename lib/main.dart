@@ -9,6 +9,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'app_bloc_observer.dart';
 import 'env.dart';
 import 'src/supauth/supauth.dart';
+import 'src/user/user.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +65,7 @@ class App extends StatelessWidget {
         SignUp.routeName: (_) => const SignUp(),
         SignIn.routeName: (_) => const SignIn(),
         ForgotPassword.routeName: (_) => const ForgotPassword(),
+        UserPage.routeName: (_) => const UserPage(),
       },
     );
   }

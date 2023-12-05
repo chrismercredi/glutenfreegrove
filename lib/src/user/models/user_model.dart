@@ -1,4 +1,4 @@
-import 'roles.dart';
+import '../../../models/roles.dart';
 
 class UserModel {
   final int id;

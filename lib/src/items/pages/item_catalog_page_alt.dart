@@ -1,71 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../models/models.dart';
-import '../../widgets/widgets.dart';
-import '../pages.dart';
+import '../../../widgets/widgets.dart';
+import '../items.dart';
 
-class ItemsCatalogAlt extends StatelessWidget {
-  final List<Item> items;
+// class ItemsCatalogAlt extends StatelessWidget {
+//   final List<Item> items;
 
-  const ItemsCatalogAlt({
-    Key? key,
-    required this.items,
-  }) : super(key: key);
+//   const ItemsCatalogAlt({
+//     Key? key,
+//     required this.items,
+//   }) : super(key: key);
 
-  static const String routeName = '/items-catalog-alt';
+//   static const String routeName = '/items-catalog-alt';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(CartPage.routeName);
-            }, // TODO: Implement search
-            icon: const Icon(
-              Icons.shopping_cart,
-              semanticLabel: 'Shopping cart',
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          const Gap(16),
-          const MassiveHeadlineText(text: 'Catalog' // Using Item's name
-              ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index];
-                final imageUrl = item.images.isNotEmpty ? item.images[0] : null;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         actions: [
+//           IconButton(
+//             onPressed: () {}, // TODO: Implement search
+//             icon: const Icon(
+//               Icons.shopping_cart,
+//               semanticLabel: 'Shopping cart',
+//             ),
+//           ),
+//         ],
+//       ),
+//       body: Column(
+//         children: [
+//           const Gap(16),
+//           const MassiveHeadlineText(text: 'Catalog' // Using Item's name
+//               ),
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: items.length,
+//               itemBuilder: (context, index) {
+//                 final item = items[index];
+//                 final imageUrl = item.images.isNotEmpty ? item.images[0] : null;
 
-                return InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ItemPage(item: item),
-                      ),
-                    );
-                  },
-                  child: ListItemWidgetAlt(
-                    itemName: item.name,
-                    itemDescription: item.description,
-                    itemPrice: item.price,
-                    image: imageUrl != null ? NetworkImage(imageUrl) : null,
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//                 return InkWell(
+//                   onTap: () {
+//                     Navigator.of(context).push(
+//                       MaterialPageRoute(
+//                         builder: (context) => ItemPage(item: item),
+//                       ),
+//                     );
+//                   },
+//                   child: ListItemWidgetAlt(
+//                     itemName: item.name,
+//                     itemDescription: item.description,
+//                     itemPrice: item.price,
+//                     image: imageUrl != null ? NetworkImage(imageUrl) : null,
+//                   ),
+//                 );
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
 // import 'package:experimental/models/item.dart';

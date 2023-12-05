@@ -1,4 +1,4 @@
-import 'item.dart';
+import '../src/items/models/item.dart';
 
 class CartItem {
   final Item item;
