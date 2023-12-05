@@ -5,7 +5,7 @@ class UserModel {
   final String username;
   final String email;
   final DateTime createdAt;
-  final DateTime? lastLogin;
+  final DateTime? updatedAt;
   final RoleModel role;
   final bool isPremium;
   final String avatarUrl; // URL to the user's avatar image
@@ -15,7 +15,7 @@ class UserModel {
     required this.username,
     required this.email,
     required this.createdAt,
-    this.lastLogin,
+    this.updatedAt,
     required this.role,
     this.isPremium = false,
     this.avatarUrl = '', // Default or placeholder avatar
@@ -27,7 +27,7 @@ class UserModel {
     String? username,
     String? email,
     DateTime? createdAt,
-    DateTime? lastLogin,
+    DateTime? updatedAt,
     RoleModel? role,
     bool? isPremium,
     String? avatarUrl,
@@ -37,7 +37,7 @@ class UserModel {
       username: username ?? this.username,
       email: email ?? this.email,
       createdAt: createdAt ?? this.createdAt,
-      lastLogin: lastLogin ?? this.lastLogin,
+      updatedAt: updatedAt ?? this.updatedAt,
       role: role ?? this.role,
       isPremium: isPremium ?? this.isPremium,
       avatarUrl: avatarUrl ?? this.avatarUrl,
@@ -51,7 +51,7 @@ class UserModel {
       username: json['username'],
       email: json['email'],
       createdAt: DateTime.parse(json['createdAt']),
-      lastLogin:
+      updatedAt:
           json['lastLogin'] != null ? DateTime.parse(json['lastLogin']) : null,
       role: RoleModel.fromJson(json['role']),
       isPremium: json['isPremium'],
@@ -67,7 +67,7 @@ class UserModel {
       'username': username,
       'email': email,
       'createdAt': createdAt.toIso8601String(),
-      'lastLogin': lastLogin?.toIso8601String(),
+      'lastLogin': updatedAt?.toIso8601String(),
       'role': role.toJson(), // Assuming RoleModel has a toJson method
       'isPremium': isPremium,
       'avatarUrl': avatarUrl,

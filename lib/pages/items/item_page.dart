@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:experimental/state/cart_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/models.dart';
+import '../../state/state.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import '../../theme/theme.dart' show ItemThemeExtensions;
@@ -13,12 +14,10 @@ import '../../theme/theme.dart' show ItemThemeExtensions;
 class ItemPage extends StatefulWidget {
   final Item item;
   final int ipsumParagraphs;
-  final CartNotifier cartNotifier;
 
   const ItemPage({
     super.key,
     required this.item,
-    required this.cartNotifier,
     this.ipsumParagraphs = 3,
   });
 
@@ -42,6 +41,8 @@ class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
     String paragraphsOfIpsum = IpsumGenerator.generate(widget.ipsumParagraphs);
+    final cartNotifier = Provider.of<CartNotifier>(context, listen: false);
+
     return Scaffold(
       key: const Key('items-page'),
       appBar: AppBar(),
@@ -90,7 +91,8 @@ class _ItemPageState extends State<ItemPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Add the item to the cart
-                      widget.cartNotifier.addItem(widget.item);
+                      cartNotifier
+                          .addItem(widget.item); // Use CartNotifier to add item
 
                       // Update the itemCount
                       setState(() {
@@ -110,8 +112,8 @@ class _ItemPageState extends State<ItemPage> {
                   onButtonPressed: () {
                     setState(() {
                       if (itemCount.value > 0) {
-                        // Add the item to the cart
-                        widget.cartNotifier.removeItem(widget.item.id);
+                        cartNotifier.removeItem(
+                            widget.item.id); // Use CartNotifier to remove item
                       }
                     });
 

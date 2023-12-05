@@ -5,15 +5,13 @@ import 'package:experimental/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/models.dart';
+import '../../state/state.dart';
 
 class UserProfilePrivate extends StatefulWidget {
-  final String? username;
-  final String? imageUrl;
-  const UserProfilePrivate({
-    super.key,
-    this.username = 'Username',
-    this.imageUrl,
-  });
+  const UserProfilePrivate({super.key});
 
   static const String routeName = '/user-profile-private';
 
@@ -26,12 +24,20 @@ class _UserProfilePrivateState extends State<UserProfilePrivate> {
   final bool _isLoading = false;
   late final TextEditingController _emailController;
   late final TextEditingController _usernameController;
+  late final UserModel _userModel;
 
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _usernameController = TextEditingController();
+    _userModel = Provider.of<UserProfileNotifier>(context, listen: false)
+        .getProfile()
+        .then((value) => _userModel = value) as UserModel;
+    _emailController = TextEditingController(
+      text: _userModel.email,
+    ); // Set the initial value of the email field    );
+    _usernameController = TextEditingController(
+      text: _userModel.username,
+    ); // Set the initial value of the username field
   }
 
   @override
@@ -59,7 +65,7 @@ class _UserProfilePrivateState extends State<UserProfilePrivate> {
                 strokeWidth: 4,
                 onEdit: () {},
                 aspectRatio: 1.0,
-                networkImage: widget.imageUrl,
+                networkImage: _userModel.avatarUrl,
                 maxHeight: 100,
               ),
               const Gap(8),

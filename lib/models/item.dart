@@ -12,7 +12,7 @@ class Item {
   final bool isSale;
   final double? salePrice;
   final Map<String, dynamic> additionalAttributes;
-  final List<String> images; // To store image URLs or paths
+  final List<String> images;
 
   Item({
     required this.id,

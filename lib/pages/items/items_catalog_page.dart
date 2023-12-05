@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:experimental/models/item.dart';
-import 'package:experimental/pages/items/item_page.dart';
-import 'package:experimental/state/item_notifier.dart'; // Import your ItemNotifier
-import 'package:experimental/state/cart_notifier.dart';
-import 'package:experimental/widgets/list_item_widget.dart';
-import 'package:experimental/widgets/massive_headline_text.dart';
+
 import 'package:gap/gap.dart';
+
+import '../../state/state.dart';
+import '../../widgets/widgets.dart';
+import '../pages.dart';
 
 class ItemsCatalog extends StatelessWidget {
   static const String routeName = '/items-catalog';
@@ -15,10 +14,7 @@ class ItemsCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemNotifier =
-        Provider.of<ItemNotifier>(context); // Access ItemNotifier
-    final cartNotifier =
-        Provider.of<CartNotifier>(context); // Access CartNotifier
+    final itemNotifier = Provider.of<ItemNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(

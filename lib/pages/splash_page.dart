@@ -64,10 +64,10 @@ class SplashPage extends StatelessWidget {
               Navigator.of(context).pushNamed('/user-profile-private');
             },
             icon: const Tooltip(
-              message: 'Login',
+              message: 'User Profile Private',
               child: Icon(
                 Icons.person,
-                semanticLabel: 'Login IconButton',
+                semanticLabel: 'User Profile Private IconButton',
               ),
             ),
           ),

@@ -7,16 +7,16 @@ import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 import '../../theme/theme.dart' show AuthThemeExtensions;
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
-  static const String routeName = '/login-page';
+  static const String routeName = '/sign-up-page';
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   final bool _redirecting = false;
@@ -49,18 +49,18 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _performSignIn(BuildContext context) async {
+  void _performSignUp(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       try {
         setState(() {
           _isLoading = true;
         });
         await Provider.of<AuthStateNotifier>(context, listen: false)
-            .signIn(_emailController.text, _passwordController.text);
+            .signUpNewUser(_emailController.text, _passwordController.text);
         // Add additional logic for successful sign-in if necessary
       } catch (e) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Login failed: $e')));
+            .showSnackBar(SnackBar(content: Text('Sign up failed: $e')));
       } finally {
         setState(() {
           _isLoading = false;
@@ -72,18 +72,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: const Key('login-page'),
+      key: const Key('sign-up-page'),
       appBar: AppBar(
         actions: [
           OutlinedButton(
             onPressed: _isLoading
                 ? null
                 : () {
-                    Navigator.of(context).pushNamed('/sign-up-page');
+                    Navigator.of(context).pushNamed('/user-application-form');
                   },
             style: Theme.of(context).blackOutlinedButtonStyle(),
-            child:
-                const Text('Sign up'), // Apply the custom OutlinedButton style
+            child: const Text(
+                'Apply for access'), // Apply the custom OutlinedButton style
           ),
           const Gap(8),
         ],
@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const MM(),
-              const Text('Login Page'),
+              const Text('Sign up Page'),
               Form(
                 key: _formKey,
                 child: Padding(
@@ -131,26 +131,14 @@ class _LoginPageState extends State<LoginPage> {
                             .infinity, // Make the button expand horizontally
                         child: ElevatedButton(
                           onPressed:
-                              _isLoading ? null : () => _performSignIn(context),
+                              _isLoading ? null : () => _performSignUp(context),
                           style: Theme.of(context).blackSquareButtonStyle(),
                           child: Text(_isLoading
                               ? 'Loading'
-                              : 'Login'), // Apply the custom button style
+                              : 'Sign up'), // Apply the custom button style
                         ),
                       ),
                       const Gap(8),
-                      SizedBox(
-                        width: double
-                            .infinity, // Make the button expand horizontally
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed('/forgot-password-page');
-                          },
-                          style: Theme.of(context).blackTextButtonStyle(),
-                          child: const Text('Forgot Password?'),
-                        ),
-                      ),
                     ],
                   ),
                 ),
