@@ -10,7 +10,7 @@ import '../supauth.dart';
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
-  static const routeName = '/sign_in';
+  static const routeName = '/sign-in';
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -74,11 +74,13 @@ class _SignInState extends State<SignIn> {
               onPressed: _isLoading
                   ? null
                   : () {
-                      Navigator.of(context).pushNamed('/sign-up-page');
+                      Navigator.of(context).pushNamed('/sign-up');
                     },
               style: Theme.of(context).blackOutlinedButtonStyle(),
-              child: const Text(
-                  'Sign up'), // Apply the custom OutlinedButton style
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text('Sign up'),
+              ), // Apply the custom OutlinedButton style
             ),
             const Gap(8),
           ],
@@ -129,7 +131,10 @@ class _SignInState extends State<SignIn> {
                           child: ElevatedButton(
                             onPressed: _signIn,
                             style: Theme.of(context).blackSquareButtonStyle(),
-                            child: const Text('Sign In'),
+                            child: const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text('Sign In'),
+                            ),
                             // Apply the custom button style
                           ),
                         ),
@@ -139,12 +144,14 @@ class _SignInState extends State<SignIn> {
                               .infinity, // Make the button expand horizontally
                           child: TextButton(
                             onPressed: () {
-                              context
-                                  .read<SupabaseAuthCubit>()
-                                  .showForgotPassword();
+                              Navigator.of(context)
+                                  .pushNamed('/forgot-password');
                             },
                             style: Theme.of(context).blackTextButtonStyle(),
-                            child: const Text('Forgot Password?'),
+                            child: const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text('Forgot Password?'),
+                            ),
                           ),
                         ),
                       ],

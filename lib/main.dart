@@ -61,6 +61,9 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const SignIn(),
+        SignUp.routeName: (_) => const SignUp(),
+        SignIn.routeName: (_) => const SignIn(),
+        ForgotPassword.routeName: (_) => const ForgotPassword(),
       },
     );
   }

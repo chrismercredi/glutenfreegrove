@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../utils/utils.dart';
-import '../../theme/theme.dart' show AuthThemeExtensions;
-import '../../widgets/widgets.dart';
+import '../../../utils/utils.dart';
+import '../../../widgets/widgets.dart';
+import '../../../theme/theme.dart' show AuthThemeExtensions;
 
 class UserApplicationForm extends StatefulWidget {
   const UserApplicationForm({super.key});
