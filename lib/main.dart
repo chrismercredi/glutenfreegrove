@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'env.dart';
+import 'models/models.dart';
+import 'pages/pages.dart';
+import 'state/state.dart';
+import 'utils/utils.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -37,6 +43,24 @@ class MainApp extends StatelessWidget {
 Route<dynamic> _generateRoute(RouteSettings settings) {
   final session = supabase.auth.currentSession;
 
+  // Generate fake data for items
+  final List<Item> fakeItems = List.generate(
+    10,
+    (index) => Item(
+      id: index,
+      name: 'Item $index',
+      description: 'Description of item $index',
+      price: 20.0 + index,
+      category: 'Category ${index % 3}',
+      createdAt: DateTime.now().subtract(Duration(days: index * 5)),
+      images: [
+        'https://picsum.photos/seed/$index/200/300',
+        'https://picsum.photos/seed/${index + 1}/200/300',
+        'https://picsum.photos/seed/${index + 2}/200/300',
+      ],
+    ),
+  );
+
   switch (settings.name) {
     case '/':
       return MaterialPageRoute(
@@ -66,7 +90,6 @@ Route<dynamic> _generateRoute(RouteSettings settings) {
     /////////////////
     /// User      ///
     /////////////////
-
     case UserProfilePrivate.routeName:
       return MaterialPageRoute(
         builder: (_) => const UserProfilePrivate(),
@@ -75,9 +98,17 @@ Route<dynamic> _generateRoute(RouteSettings settings) {
     /////////////////
     /// Items     ///
     /////////////////
-    case ItemPage.routeName:
+    // case ItemPage.routeName:
+    //   return MaterialPageRoute(
+    //     builder: (_) => const ItemPage(),
+    //   );
+    case ItemsCatalog.routeName:
       return MaterialPageRoute(
-        builder: (_) => const ItemPage(),
+        builder: (_) => ItemsCatalog(items: fakeItems),
+      );
+    case ItemsCatalogAlt.routeName:
+      return MaterialPageRoute(
+        builder: (_) => ItemsCatalogAlt(items: fakeItems),
       );
 
     /////////////////
