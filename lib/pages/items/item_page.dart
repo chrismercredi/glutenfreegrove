@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:experimental/state/cart_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -28,10 +30,12 @@ class ItemPage extends StatefulWidget {
 
 class _ItemPageState extends State<ItemPage> {
   final ValueNotifier<int> itemCount = ValueNotifier<int>(0);
+  Timer? _debounceTimer;
 
   @override
   void dispose() {
     itemCount.dispose();
+    _debounceTimer?.cancel();
     super.dispose();
   }
 
@@ -85,6 +89,10 @@ class _ItemPageState extends State<ItemPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      // Add the item to the cart
+                      widget.cartNotifier.addItem(widget.item);
+
+                      // Update the itemCount
                       setState(() {
                         itemCount.value++;
                       });
@@ -101,7 +109,15 @@ class _ItemPageState extends State<ItemPage> {
                   itemCount: itemCount.value,
                   onButtonPressed: () {
                     setState(() {
-                      if (itemCount.value > 0) itemCount.value--;
+                      if (itemCount.value > 0) {
+                        // Add the item to the cart
+                        widget.cartNotifier.removeItem(widget.item.id);
+                      }
+                    });
+
+                    // Update the itemCount
+                    setState(() {
+                      itemCount.value--;
                     });
                   },
                 ),

@@ -1,24 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:experimental/models/item.dart';
 import 'package:experimental/pages/items/item_page.dart';
+import 'package:experimental/state/item_notifier.dart'; // Import your ItemNotifier
 import 'package:experimental/state/cart_notifier.dart';
 import 'package:experimental/widgets/list_item_widget.dart';
 import 'package:experimental/widgets/massive_headline_text.dart';
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ItemsCatalog extends StatelessWidget {
-  final List<Item> items;
-  final CartNotifier cartNotifier;
-
-  const ItemsCatalog({
-    Key? key,
-    required this.items,
-  }) : super(key: key);
-
   static const String routeName = '/items-catalog';
+
+  const ItemsCatalog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final itemNotifier =
+        Provider.of<ItemNotifier>(context); // Access ItemNotifier
+    final cartNotifier =
+        Provider.of<CartNotifier>(context); // Access CartNotifier
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -34,15 +35,14 @@ class ItemsCatalog extends StatelessWidget {
       body: Column(
         children: [
           const Gap(16),
-          const MassiveHeadlineText(text: 'Catalog' // Using Item's name
-              ),
+          const MassiveHeadlineText(text: 'Catalog'),
           Expanded(
             child: ListView.builder(
-              itemCount: items.length,
+              itemCount:
+                  itemNotifier.items.length, // Use the length from ItemNotifier
               itemBuilder: (context, index) {
-                final item = items[index];
+                final item = itemNotifier.items[index];
 
-                // Check if there are any images in the item's images list
                 final imageUrl = item.images.isNotEmpty ? item.images[0] : null;
 
                 return Padding(
@@ -59,7 +59,6 @@ class ItemsCatalog extends StatelessWidget {
                       itemName: item.name,
                       itemDescription: item.description,
                       itemPrice: item.price,
-                      // Pass the imageUrl to the ListItemWidget
                       image: imageUrl != null ? NetworkImage(imageUrl) : null,
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'env.dart';
@@ -17,13 +18,19 @@ Future<void> main() async {
   );
 
   runApp(
-    MainApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ItemNotifier()),
+        ChangeNotifierProvider(create: (context) => CartNotifier()),
+        // Add other providers here
+      ],
+      child: const MainApp(),
+    ),
   );
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
-  final AuthStateNotifier authStateNotifier = AuthStateNotifier();
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
