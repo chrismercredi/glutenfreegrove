@@ -21,7 +21,9 @@ class ItemsCatalogAlt extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {}, // TODO: Implement search
+            onPressed: () {
+              Navigator.of(context).pushNamed(CartPage.routeName);
+            }, // TODO: Implement search
             icon: const Icon(
               Icons.shopping_cart,
               semanticLabel: 'Shopping cart',

@@ -13,6 +13,18 @@ class SplashPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              Navigator.of(context).pushNamed('/cart-page');
+            },
+            icon: const Tooltip(
+              message: 'Cart page',
+              child: Icon(
+                Icons.shopping_cart,
+                semanticLabel: 'Cart page',
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
               Navigator.of(context).pushNamed('/items-catalog-alt');
             },
             icon: const Tooltip(

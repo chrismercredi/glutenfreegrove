@@ -98,10 +98,6 @@ Route<dynamic> _generateRoute(RouteSettings settings) {
     /////////////////
     /// Items     ///
     /////////////////
-    // case ItemPage.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (_) => const ItemPage(),
-    //   );
     case ItemsCatalog.routeName:
       return MaterialPageRoute(
         builder: (_) => ItemsCatalog(items: fakeItems),
@@ -109,6 +105,16 @@ Route<dynamic> _generateRoute(RouteSettings settings) {
     case ItemsCatalogAlt.routeName:
       return MaterialPageRoute(
         builder: (_) => ItemsCatalogAlt(items: fakeItems),
+      );
+
+    /////////////////
+    /// Cart      ///
+    /////////////////
+    case CartPage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => CartPage(
+          items: fakeItems,
+        ),
       );
 
     /////////////////

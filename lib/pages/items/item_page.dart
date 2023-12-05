@@ -1,3 +1,4 @@
+import 'package:experimental/state/cart_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,10 +11,12 @@ import '../../theme/theme.dart' show ItemThemeExtensions;
 class ItemPage extends StatefulWidget {
   final Item item;
   final int ipsumParagraphs;
+  final CartNotifier cartNotifier;
 
   const ItemPage({
     super.key,
     required this.item,
+    required this.cartNotifier,
     this.ipsumParagraphs = 3,
   });
 

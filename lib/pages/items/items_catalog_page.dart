@@ -1,5 +1,6 @@
 import 'package:experimental/models/item.dart';
 import 'package:experimental/pages/items/item_page.dart';
+import 'package:experimental/state/cart_notifier.dart';
 import 'package:experimental/widgets/list_item_widget.dart';
 import 'package:experimental/widgets/massive_headline_text.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:gap/gap.dart';
 
 class ItemsCatalog extends StatelessWidget {
   final List<Item> items;
+  final CartNotifier cartNotifier;
 
   const ItemsCatalog({
     Key? key,

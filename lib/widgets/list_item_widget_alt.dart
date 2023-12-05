@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// Large list item detail with big image and overlayed details
 class ListItemWidgetAlt extends StatelessWidget {
   final String itemName;
   final String itemDescription;
