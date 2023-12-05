@@ -1,14 +1,22 @@
-import 'package:experimental/state/authenticated_route_handler.dart';
+import 'package:experimental/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
+import 'package:supabase_flutter/supabase_flutter.dart';
+// ignore:depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart';
 
+import 'app_bloc_observer.dart';
 import 'env.dart';
-import 'state/state.dart';
+import 'src/supauth/supauth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  Bloc.observer = const AppBlocObserver();
+
+  // Turn off the # in the URLs on the web
+  usePathUrlStrategy();
 
   await Supabase.initialize(
     url: supabaseUrl,
@@ -16,34 +24,44 @@ Future<void> main() async {
   );
 
   runApp(
-    MultiProvider(
+    MultiRepositoryProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthStateNotifier()),
-        ChangeNotifierProvider(create: (context) => UserProfileNotifier()),
-        ChangeNotifierProvider(create: (context) => ItemNotifier()),
-        ChangeNotifierProvider(create: (context) => CartNotifier()),
-        // Add other providers here
+        RepositoryProvider(
+          create: (_) => SupabaseRepository(
+            client: supabase,
+          ),
+        ),
       ],
-      child: const MainApp(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => SupabaseAuthCubit(
+              supabaseRepository: context.read<SupabaseRepository>(),
+            ),
+          ),
+        ],
+        child: const App(),
+      ),
     ),
   );
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Gluten Free Grove',
       theme: ThemeData(
         primaryColor: Colors.black,
         fontFamily: GoogleFonts.openSans().fontFamily,
       ),
-      home: const AuthenticatedRouteHandler(initialRoute: '/'),
+      initialRoute: '/',
+      routes: {
+        '/': (_) => const SignIn(),
+      },
     );
   }
 }
-
-// Fake user: email: test@gmail.com, password: test1234?C12
-// christophermercredi@gmail.com, test1234?C12

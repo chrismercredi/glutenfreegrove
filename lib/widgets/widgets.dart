@@ -7,3 +7,4 @@ export 'image_animated_counter.dart';
 export 'jagged_list_tile.dart';
 export 'list_item_widget.dart';
 export 'list_item_widget_alt.dart';
+export 'auth_list_tile.dart';
