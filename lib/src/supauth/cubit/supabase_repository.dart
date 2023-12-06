@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../utils/utils.dart';
+
 /// Thrown when an authentication error occurs in Supabase.
 class SupabaseAuthException implements Exception {
   /// A message describing the authentication error.
@@ -54,6 +56,7 @@ class SupabaseRepository {
   Future<void> resetPasswordForEmail({required String email}) async {
     try {
       await client.auth.resetPasswordForEmail(email);
+      await supabase.auth.reauthenticate();
     } catch (e) {
       throw SupabaseAuthException('Failed to reset password');
     }
@@ -75,6 +78,17 @@ class SupabaseRepository {
     }
   }
 
+  /// Delete the current user.
+  ///
+  /// Throws a [SupabaseAuthException] if the sign-out fails.
+  Future<void> deleteUser({required String uid}) async {
+    try {
+      await client.auth.admin.deleteUser(uid);
+    } catch (e) {
+      throw SupabaseAuthException('Failed to sign out');
+    }
+  }
+
   /// Signs out the current user.
   ///
   /// Throws a [SupabaseAuthException] if the sign-out fails.
@@ -83,6 +97,23 @@ class SupabaseRepository {
       await client.auth.signOut();
     } catch (e) {
       throw SupabaseAuthException('Failed to sign out');
+    }
+  }
+
+  /// Updates the current user.
+  ///
+  /// Throws a [SupabaseAuthException] if the sign-out fails.
+  Future<void> updateUserPassword(
+    String? password,
+    String? nonce,
+  ) async {
+    try {
+      await client.auth.updateUser(UserAttributes(
+        password: password,
+        nonce: nonce,
+      ));
+    } catch (e) {
+      throw SupabaseAuthException('Failed to update password');
     }
   }
 }

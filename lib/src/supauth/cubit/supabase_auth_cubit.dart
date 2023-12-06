@@ -94,14 +94,34 @@ class SupabaseAuthCubit extends Cubit<SupabaseAuthState> {
     }
   }
 
+  Future<void> deleteUser({required String uid}) async {
+    try {
+      await supabaseRepository.deleteUser(uid: uid);
+      emit(SupabaseAuthDeletedUser());
+    } catch (e) {
+      emit(SupabaseAuthError('Delete user failed: ${e.toString()}'));
+    }
+  }
+
   Future<void> resetPasswordForEmail(String email) async {
     try {
       emit(SupabaseAuthLoading());
+      print(email);
       await supabaseRepository.resetPasswordForEmail(email: email);
       emit(SupabaseAuthPasswordReset(
           'Password reset email sent to $email. Please check your inbox.'));
     } catch (e) {
       emit(SupabaseAuthError('Password reset failed: ${e.toString()}'));
+    }
+  }
+
+  Future<void> updateUserPassword(String password, String? nonce) async {
+    try {
+      emit(SupabaseAuthLoading());
+      await supabaseRepository.updateUserPassword(password, nonce);
+      emit(SupabaseAuthPasswordUpdated());
+    } catch (e) {
+      emit(SupabaseAuthError('Password update failed: ${e.toString()}'));
     }
   }
 

@@ -1,11 +1,12 @@
-import 'package:experimental/src/supauth/theme/auth_theme_extensions.dart';
-import 'package:experimental/widgets/mm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/utils.dart';
+import '../../../widgets/widgets.dart';
 import '../supauth.dart';
+import '../theme/auth_theme_extensions.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -63,7 +64,7 @@ class _SignInState extends State<SignIn> {
       },
       listener: (context, state) {
         if (state is SupabaseAuthAuthenticated) {
-          Navigator.of(context).pop();
+          GoRouter.of(context).pop();
         }
       },
       child: Scaffold(
@@ -74,7 +75,7 @@ class _SignInState extends State<SignIn> {
               onPressed: _isLoading
                   ? null
                   : () {
-                      Navigator.of(context).pushNamed('/sign-up');
+                      GoRouter.of(context).pushNamed(SignUp.routeName);
                     },
               style: Theme.of(context).blackOutlinedButtonStyle(),
               child: const Padding(
@@ -144,7 +145,7 @@ class _SignInState extends State<SignIn> {
                               .infinity, // Make the button expand horizontally
                           child: TextButton(
                             onPressed: () {
-                              Navigator.of(context)
+                              GoRouter.of(context)
                                   .pushNamed('/forgot-password');
                             },
                             style: Theme.of(context).blackTextButtonStyle(),

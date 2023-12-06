@@ -1,5 +1,4 @@
-import 'package:experimental/utils/utils.dart';
-
+import '../../../utils/utils.dart';
 import '../user.dart';
 
 class ProfileRepository {
@@ -38,5 +37,11 @@ class ProfileRepository {
   // Delete a profile
   Future<void> deleteProfile(String id) async {
     // TODO: Implement the logic to delete a profile from the data source
+  }
+
+  Future<void> deleteUser(String id) async {
+    if (supabase.auth.currentUser!.email == 'christophermercredi@gmail.com') {
+      await supabase.auth.admin.deleteUser(id);
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/utils.dart';
 import '../../../theme/theme.dart' show AuthThemeExtensions;
@@ -55,7 +56,7 @@ class _SignUpState extends State<SignUp> {
       },
       listener: (context, state) {
         if (state is SupabaseAuthAuthenticated) {
-          Navigator.of(context).pop();
+          GoRouter.of(context).pop();
         }
       },
       child: Scaffold(
@@ -66,7 +67,7 @@ class _SignUpState extends State<SignUp> {
               onPressed: _isLoading
                   ? null
                   : () {
-                      Navigator.of(context).pushNamed('/sign-in');
+                      GoRouter.of(context).pushNamed('/sign-in');
                     },
               style: Theme.of(context).blackOutlinedButtonStyle(),
               child: const Padding(
@@ -160,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                               .infinity, // Make the button expand horizontally
                           child: TextButton(
                             onPressed: () {
-                              Navigator.of(context)
+                              GoRouter.of(context)
                                   .pushNamed('/forgot-password');
                             },
                             style: Theme.of(context).blackTextButtonStyle(),

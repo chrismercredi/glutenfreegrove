@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glutenfreegrove/src/user/pages/pages.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashPage extends StatelessWidget {
@@ -49,7 +50,7 @@ class SplashPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/items-page');
+              Navigator.of(context).pushNamed('Items');
             },
             icon: const Tooltip(
               message: 'Items',
@@ -61,7 +62,7 @@ class SplashPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/user-profile-private');
+              Navigator.of(context).pushNamed(UserPage.routeName);
             },
             icon: const Tooltip(
               message: 'User Profile Private',

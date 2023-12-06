@@ -28,7 +28,11 @@ class SupabaseAuthSignIn extends SupabaseAuthState {}
 
 class SupabaseAuthSignUp extends SupabaseAuthState {}
 
+class SupabaseAuthDeletedUser extends SupabaseAuthState {}
+
 class SupabaseAuthForgotPassword extends SupabaseAuthState {}
+
+class SupabaseAuthPasswordUpdated extends SupabaseAuthState {}
 
 /// Authenticated state.
 ///

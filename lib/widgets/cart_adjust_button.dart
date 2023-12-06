@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../theme//theme.dart' show ItemThemeExtensions;
+import '../src/items/theme/item_theme_extensions.dart';
 
 class CartAdjustButton extends StatelessWidget {
   final int itemCount;

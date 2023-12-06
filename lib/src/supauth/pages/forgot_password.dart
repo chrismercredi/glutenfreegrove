@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../widgets/widgets.dart';
 import '../supauth.dart';
@@ -29,6 +30,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   void _sendResetEmail() {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text.trim();
+      print(email);
       context.read<SupabaseAuthCubit>().resetPasswordForEmail(email);
     }
   }
@@ -43,7 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       },
       listener: (context, state) {
         if (state is SupabaseAuthAuthenticated) {
-          Navigator.of(context).pop();
+          GoRouter.of(context).pop();
         }
       },
       child: Scaffold(
@@ -54,7 +56,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               onPressed: _isLoading
                   ? null
                   : () {
-                      Navigator.of(context).pushNamed('/sign-up');
+                      GoRouter.of(context).pushNamed('/sign-up');
                     },
               style: Theme.of(context).blackOutlinedButtonStyle(),
               child: const Padding(
@@ -96,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               .infinity, // Make the button expand horizontally
                           child: ElevatedButton(
                             onPressed:
-                                _isLoading ? null : () => _sendResetEmail,
+                                _isLoading ? null : () => _sendResetEmail(),
                             style: Theme.of(context).blackSquareButtonStyle(),
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -111,7 +113,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               .infinity, // Make the button expand horizontally
                           child: TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed('/sign-in');
+                              GoRouter.of(context).pushNamed('/sign-in');
                             },
                             style: Theme.of(context).blackTextButtonStyle(),
                             child: const Padding(
