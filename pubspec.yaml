@@ -8,17 +8,20 @@ environment:
 
 dependencies:
   animated_flip_counter: ^0.2.6
+  bloc: ^8.1.2
   fast_noise: ^2.0.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.3
   gap: ^3.0.1
   google_fonts: ^6.1.0
+  supaauth: ^0.2.0-alpha.1
   supabase_flutter: ^1.10.25
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   melos: ^3.3.0
 
 flutter:
